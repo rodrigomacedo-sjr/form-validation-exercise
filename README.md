@@ -32,3 +32,12 @@ Don’t forget to style validations with CSS by using the :user-valid and :user-
 - [ ] test it a bit
 - [ ] some css
 
+## How to run:
+### Requisites:
+You must have [live-server](https://www.npmjs.com/package/live-server) installed.
+
+```
+git clone git@github.com:rodrigomacedo-sjr/form-validation-exercise.git
+cd form-validation-exercise
+live-server
+```
