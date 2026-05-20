@@ -15,7 +15,7 @@ Test out all possible cases.
 Don’t forget to style validations with CSS by using the :user-valid and :user-invalid pseudo-classes!
 
 ## TODO
-- [ ] setup a blank HTML
+- [x] setup a blank HTML
 - [ ] setup the basic HTML form
   - [ ] e-mail
   - [ ] country
