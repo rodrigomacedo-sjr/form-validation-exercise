@@ -15,6 +15,8 @@ form.addEventListener("submit", (event) => {
 
   checkPostalCode(formData);
 
+  checkPassword(formData);
+
   checkPasswordConfirmation(formData);
 
   console.log(form.checkValidity());
@@ -35,14 +37,13 @@ form.addEventListener("submit", (event) => {
 });
 
 function checkCountry(formData) {
-  const errMsg = "";
+  let errMsg = "";
 
   const pattern = /^[A-Z]+[A-Za-z\s]+$/;
 
   if (!pattern.test(formData.country.value)) {
     errMsg =
       "Country must begin with a capital letter and be of length at least two";
-    return;
   }
 
   if (formData.country.value.length > 50) {
@@ -53,18 +54,41 @@ function checkCountry(formData) {
 }
 
 function checkPostalCode(formData) {
+  let errMsg = "";
   const code = formData.postalCode.value;
 
   const patternA = /^\d{5}$/;
   const patternB = /^\d{5}-\d{4}$/;
 
   if (patternA.test(code) || patternB.test(code)) {
-    formData.postalCode.setCustomValidity("");
     return;
   }
 
-  const errMsg = "Postal Code must be of the format [12345] or [12345-1234]";
+  errMsg = "Postal Code must be of the format [12345] or [12345-1234]";
   formData.postalCode.setCustomValidity(errMsg);
+}
+
+function checkPassword(formData) {
+  let errMsg = "";
+  const password = formData.password.value;
+
+  const patterns = [/[A-Z]/, /[a-z]/, /\d/, /[^A-Za-z0-9\s]/];
+
+  if (password.length > 50) {
+    errMsg = "Password can't be over 50 characters";
+  } else if (password.length < 4) {
+    errMsg = "Password must be of length at least 4";
+  } else if (!patterns[0].test(password)) {
+    errMsg = "Password must contain at least one uppercase char";
+  } else if (!patterns[1].test(password)) {
+    errMsg = "Password must contain at least one lowercase char";
+  } else if (!patterns[2].test(password)) {
+    errMsg = "Password must contain at least one numeric char";
+  } else if (!patterns[3].test(password)) {
+    errMsg = "Password must contain at least one special char";
+  }
+
+  formData.password.setCustomValidity(errMsg);
 }
 
 function checkPasswordConfirmation(formData) {
