@@ -28,9 +28,9 @@ Don’t forget to style validations with CSS by using the :user-valid and :user-
   - [x] postal code can be a regex
   - [x] password: min, max size must have special char, lower, upper, num, be equal to confirmation
   - [x] confirmation just needs to be the same as password
-- [ ] validations show up on screen 
-- [ ] test it a bit
-- [ ] some css
+- [x] validations show up on screen 
+- [x] test it a bit
+- [x] some css
 
 ## How to run:
 ### Requisites:
