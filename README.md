@@ -24,7 +24,7 @@ Don’t forget to style validations with CSS by using the :user-valid and :user-
   - [x] password confirmation
 - [ ] validations (console.log)
   - [x] email type, required
-  - [ ] country must have min, max size, no special chars
+  - [x] country must have min, max size, no special chars
   - [x] postal code can be a regex
   - [ ] password: min, max size must have special char, lower, upper, num, be equal to confirmation
   - [x] confirmation just needs to be the same as password

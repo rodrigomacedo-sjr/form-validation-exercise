@@ -35,15 +35,20 @@ form.addEventListener("submit", (event) => {
 });
 
 function checkCountry(formData) {
+  const errMsg = "";
+
   const pattern = /^[A-Z]+[A-Za-z\s]+$/;
 
-  if (pattern.test(formData.country.value)) {
-    formData.country.setCustomValidity("");
+  if (!pattern.test(formData.country.value)) {
+    errMsg =
+      "Country must begin with a capital letter and be of length at least two";
     return;
   }
 
-  const errMsg =
-    "Country must begin with a capital letter and be of length at least two";
+  if (formData.country.value.length > 50) {
+    errMsg = "Country can't be over 50 characters";
+  }
+
   formData.country.setCustomValidity(errMsg);
 }
 
