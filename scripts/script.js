@@ -1,13 +1,9 @@
 const form = document.querySelector("#my-form");
 
+const results = document.querySelector("#results");
+
 document.addEventListener("keyup", (event) => {
-  const formData = {
-    email: form.querySelector("#email"),
-    country: form.querySelector("#country"),
-    postalCode: form.querySelector("#postal-code"),
-    password: form.querySelector("#password"),
-    confirm: form.querySelector("#confirm"),
-  };
+  const formData = getFormData();
 
   checkCountry(formData);
 
@@ -21,22 +17,55 @@ document.addEventListener("keyup", (event) => {
 form.addEventListener("submit", (event) => {
   event.preventDefault();
 
-  console.log(form.checkValidity());
+  const formData = getFormData();
+
   if (form.checkValidity()) {
-    console.log("Form is valid!");
-    return;
-  }
+    updateModalHeader(":) Form is valid!");
+    updateModalText("congratulations");
+    showModal(2);
+  } else {
+    updateModalHeader(":( Form is invalid");
+    let output = "";
 
-  console.log("Form is invalid");
-
-  for (const input in formData) {
-    if (formData[input].validity.valid) {
-      continue;
+    for (const input in formData) {
+      if (formData[input].validity.valid) {
+        continue;
+      }
+      output +=
+        "<p>" +
+        `Error (${input}): ${formData[input].validationMessage}` +
+        "</p></br>";
     }
-    console.log(`Error (${input}): ${formData[input].validationMessage}`);
+
+    updateModalText(output);
+    showModal(3);
   }
-  return;
 });
+
+function getFormData() {
+  return {
+    email: form.querySelector("#email"),
+    country: form.querySelector("#country"),
+    postalCode: form.querySelector("#postal-code"),
+    password: form.querySelector("#password"),
+    confirm: form.querySelector("#confirm"),
+  };
+}
+
+function updateModalHeader(text) {
+  results.querySelector("h1").textContent = text;
+}
+
+function updateModalText(text) {
+  results.querySelector("div").innerHTML = text;
+}
+
+function showModal(seconds = 2) {
+  results.showModal();
+  setTimeout(() => {
+    results.close();
+  }, seconds * 1000);
+}
 
 function checkCountry(formData) {
   let errMsg = "";
