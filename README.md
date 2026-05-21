@@ -16,12 +16,12 @@ Don’t forget to style validations with CSS by using the :user-valid and :user-
 
 ## TODO
 - [x] setup a blank HTML
-- [ ] setup the basic HTML form
-  - [ ] e-mail
-  - [ ] country
-  - [ ] postal code
-  - [ ] password
-  - [ ] password confirmation
+- [x] setup the basic HTML form
+  - [x] e-mail
+  - [x] country
+  - [x] postal code
+  - [x] password
+  - [x] password confirmation
 - [ ] validations (console.log)
   - [ ] email type
   - [ ] country must have min, max size, no special chars
