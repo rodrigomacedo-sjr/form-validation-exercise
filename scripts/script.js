@@ -1,8 +1,6 @@
 const form = document.querySelector("#my-form");
 
-form.addEventListener("submit", (event) => {
-  event.preventDefault();
-
+document.addEventListener("keyup", (event) => {
   const formData = {
     email: form.querySelector("#email"),
     country: form.querySelector("#country"),
@@ -18,6 +16,10 @@ form.addEventListener("submit", (event) => {
   checkPassword(formData);
 
   checkPasswordConfirmation(formData);
+});
+
+form.addEventListener("submit", (event) => {
+  event.preventDefault();
 
   console.log(form.checkValidity());
   if (form.checkValidity()) {
@@ -60,11 +62,10 @@ function checkPostalCode(formData) {
   const patternA = /^\d{5}$/;
   const patternB = /^\d{5}-\d{4}$/;
 
-  if (patternA.test(code) || patternB.test(code)) {
-    return;
+  if (!patternA.test(code) && !patternB.test(code)) {
+    errMsg = "Postal Code must be of the format [12345] or [12345-1234]";
   }
 
-  errMsg = "Postal Code must be of the format [12345] or [12345-1234]";
   formData.postalCode.setCustomValidity(errMsg);
 }
 

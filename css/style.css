@@ -1,3 +1,7 @@
 body {
   background-color: #e3f1ff;
 }
+
+input:invalid {
+  background-color: red;
+}
