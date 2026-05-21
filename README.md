@@ -31,6 +31,7 @@ Don’t forget to style validations with CSS by using the :user-valid and :user-
 - [x] validations show up on screen 
 - [x] test it a bit
 - [x] some css
+- [x] go hard on css
 
 ## How to run:
 ### Requisites:
