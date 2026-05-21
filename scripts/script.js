@@ -11,10 +11,9 @@ form.addEventListener("submit", (event) => {
     confirm: form.querySelector("#confirm"),
   };
 
-  if (formData.password.value != formData.confirm.value) {
-    const errMsg = "Passwords must match";
-    formData.confirm.setCustomValidity(errMsg);
-  }
+  checkPostalCode(formData);
+
+  checkPasswordConfirmation(formData);
 
   console.log(form.checkValidity());
   if (form.checkValidity()) {
@@ -32,3 +31,24 @@ form.addEventListener("submit", (event) => {
   }
   return;
 });
+
+function checkPostalCode(formData) {
+  const code = formData.postalCode.value;
+
+  const patternA = new RegExp("\\d{5}$");
+  const patternB = new RegExp("\\d{5}-\\d{4}$");
+
+  if (patternA.test(code) || patternB.test(code)) {
+    return;
+  }
+
+  const errMsg = "Postal Code must be of the format [12345] or [12345-1234]";
+  formData.postalCode.setCustomValidity(errMsg);
+}
+
+function checkPasswordConfirmation(formData) {
+  if (formData.password.value != formData.confirm.value) {
+    const errMsg = "Passwords must match";
+    formData.confirm.setCustomValidity(errMsg);
+  }
+}
