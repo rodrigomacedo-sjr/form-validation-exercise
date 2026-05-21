@@ -11,6 +11,8 @@ form.addEventListener("submit", (event) => {
     confirm: form.querySelector("#confirm"),
   };
 
+  checkCountry(formData);
+
   checkPostalCode(formData);
 
   checkPasswordConfirmation(formData);
@@ -32,13 +34,27 @@ form.addEventListener("submit", (event) => {
   return;
 });
 
+function checkCountry(formData) {
+  const pattern = /^[A-Z]+[A-Za-z\s]+$/;
+
+  if (pattern.test(formData.country.value)) {
+    formData.country.setCustomValidity("");
+    return;
+  }
+
+  const errMsg =
+    "Country must begin with a capital letter and be of length at least two";
+  formData.country.setCustomValidity(errMsg);
+}
+
 function checkPostalCode(formData) {
   const code = formData.postalCode.value;
 
-  const patternA = new RegExp("\\d{5}$");
-  const patternB = new RegExp("\\d{5}-\\d{4}$");
+  const patternA = /^\d{5}$/;
+  const patternB = /^\d{5}-\d{4}$/;
 
   if (patternA.test(code) || patternB.test(code)) {
+    formData.postalCode.setCustomValidity("");
     return;
   }
 
@@ -47,6 +63,8 @@ function checkPostalCode(formData) {
 }
 
 function checkPasswordConfirmation(formData) {
+  formData.confirm.setCustomValidity("");
+
   if (formData.password.value != formData.confirm.value) {
     const errMsg = "Passwords must match";
     formData.confirm.setCustomValidity(errMsg);
